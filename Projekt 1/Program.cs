@@ -70,7 +70,7 @@ static string bWeaponPick()
 
     List<int> weaponsDmg = new List<int> {30, 50, 40, 20};
     List<int> weaponsHit = new List<int> {70, 50, 60, 100};
-    List<string> bWeapons = new List<string> { "Sword", "Axe", "Dagger", "Bow" };
+    List<string> bWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };
     for (int e = 0; e < bWeapons.Count; e++)
     {
         consoleOutput = $"{e + 1}: " + $"{bWeapons[e]}";
@@ -80,17 +80,17 @@ static string bWeaponPick()
         string pick = Console.ReadLine();
         
 
-            if(int.TryParse(pick, out int pickOut) && pickOut <= 5 && pickOut >=1)
+            if(int.TryParse(pick, out int pickOut) && pickOut <= bWeapons.Count && pickOut >=1)
             {
                 Console.Clear();
-
-                if(pickOut == 1)
+            for(int e = 0; e<bWeapons.Count; e++)
+                if(pickOut == e + 1)
                 {
-                    consoleOutput = "Sword stats";
+                    consoleOutput = $"{bWeapons[e]}" + " stats";
                     writing(consoleOutput);
-                    consoleOutput = $"Damage: {weaponsDmg[0]}";
+                    consoleOutput = $"Damage: {weaponsDmg[e]}";
                     writing(consoleOutput);
-                    consoleOutput = $"Hit chance: {weaponsHit[0]}";
+                    consoleOutput = $"Hit chance: {weaponsHit[e]}";
                     writing(consoleOutput);
                     consoleOutput = "Are you sure? (y/n)";
                     writing(consoleOutput);

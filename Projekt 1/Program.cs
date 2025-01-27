@@ -18,10 +18,20 @@ List<int> weaponsHit = new List<int> {70, 50, 60, 100};
 string w1 = bWeaponPick();
 weapons.Add(w1);
 
-consoleOutput = $"{weapons[0]}";
+consoleOutput = "You chose " + $"{weapons[0]}" + ", now it's time to begin your journey.";
 writing(consoleOutput);
+Thread.Sleep(1000);
+
+bool check = false;
+Proceed(check);
+
 
 Console.ReadLine();
+
+
+
+
+
 
 
 static string nameP()
@@ -119,6 +129,38 @@ static string bWeaponPick()
         }
     }
 }
+
+
+
+static bool Proceed(bool check)
+{
+    
+    while(true)
+    {
+        Console.Clear();
+        string consoleOutput = "Are you ready? (y/n)";
+        writing(consoleOutput); 
+
+        string checkC = Console.ReadLine();
+        if(checkC.ToLower() == "y")
+        {
+            return true;
+        }
+        else if(checkC.ToLower() == "n")
+        {
+            consoleOutput = "Whenever you're ready.";
+            writing(consoleOutput); 
+            continue; 
+        }
+        else
+        {
+            consoleOutput = "Error";
+            writing(consoleOutput); 
+            continue; 
+        }
+    }
+}
+
 
 
 //slut på lektion commit

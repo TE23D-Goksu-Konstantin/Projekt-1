@@ -79,6 +79,7 @@ static string nameP()
         }
         else
         {
+            
             return name;
         }
     }
@@ -235,6 +236,7 @@ static void battle()
 {
 
     Proceed(true);
+    Console.Clear();
 
     string eName = eNamePicker();
 
@@ -246,7 +248,15 @@ static void battle()
     int hp = 100;
     while(hp <= 100 && hp > 0)
     {
+        string pName = nameP();
+        Console.WriteLine($"{pName}'s HP: " + """██████████""" + "\n----------------" + "\nWrite Atk to view your attacks" 
+        + "\nWrite Inv to view your inventory"+ "\n----------------");
         
+        Console.WriteLine($"\n\n\n{eName}'s HP: " + """██████████""");
+        Console.ReadLine();
+
+
+
     }
 
     
@@ -285,5 +295,5 @@ class EnemyPlayer
 
 
 
-
+//kom ihåg pseudo kod
 //slut på lektion commit

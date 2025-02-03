@@ -30,9 +30,11 @@ void Main()
     Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
     EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponsDmg[0], eWeaponsHit[0]); 
 
-    Console.WriteLine($"Your health: {enemyPlayer.enemyPlayerhealth}, Your damage: {enemyPlayer.enemyPlayerdamage}, Your hitchance: {enemyPlayer.enemyPlayerhitChance}");
-    Console.WriteLine($"Your health: {player.playerhealth}, Your damage: {player.playerdamage}, Your hitchance: {player.playerhitChance}");
-    Console.ReadLine();
+    // Console.WriteLine($"Your health: {enemyPlayer.enemyPlayerhealth}, Your damage: {enemyPlayer.enemyPlayerdamage}, Your hitchance: {enemyPlayer.enemyPlayerhitChance}");
+    // Console.WriteLine($"Your health: {player.playerhealth}, Your damage: {player.playerdamage}, Your hitchance: {player.playerhitChance}");
+    // Console.ReadLine();
+
+    battle();
     
 }
 
@@ -164,7 +166,7 @@ static (string, int, int) eWeaponPick()
     List<int> weaponsHit = new List<int> {70, 50, 60, 100};
     List<string> eWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };
 
-    int randomPick = Random.Shared.Next(1, 5);
+    int randomPick = Random.Shared.Next(0, eWeapons.Count);
 
         if(randomPick == 1)
         {
@@ -212,14 +214,40 @@ static bool Proceed(bool check)
     }
 }
 
+static string eNamePicker()
+{
+    List<string> eNames = new List<string> {
+    "Venom Reaper",
+    "Doom Fang Jacob",
+    "Bloody Howler",
+    "Shadow Brute Richard",
+    "Cursed Stalker",         
+    "Inferno Wraith",
+    "Iron Specter",
+    "Night Titan Ludvig",
+    "Rotting Ghoul Konstantin",
+    "Obsidian Warlock"};
+    int eNameRan = Random.Shared.Next(0,eNames.Count);
+    return eNames[eNameRan];
+}
+
 static void battle()
 {
 
     Proceed(true);
-    List<string> eNames = new List<string> {};
-    int eName = Random.Shared.Next(1, 10);
-    List
-    Console.WriteLine("A new foe has appeared,")
+
+    string eName = eNamePicker();
+
+    string consoleOutput = $"A new foe has appeared, their name's {eName} and they approach you with malicious intent";
+    writing(consoleOutput);
+    Thread.Sleep(1000);
+    Console.Clear();
+
+    int hp = 100;
+    while(hp <= 100 && hp > 0)
+    {
+        
+    }
 
     
 

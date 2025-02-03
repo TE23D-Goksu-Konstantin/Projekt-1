@@ -5,18 +5,32 @@
 List<string> weapons = new List<string> {};
 List<int> weaponsDmg = new List<int> {};
 List<int> weaponsHit = new List<int> {};
+List<string> eWeapons = new List<string> {};
+List<int> eWeaponsDmg = new List<int> {};
+List<int> eWeaponsHit = new List<int> {};
+List<int> enemyWeaponsDmg = new List<int> {};
 List<int> statBweaponsDmg = new List<int> {30, 50, 40, 20};
 List<int> statBweaponsHit = new List<int> {70, 50, 60, 100};
+ 
 
-
+    (string eWeapon, int eWeaponDmg, int eWeaponHit)= eWeaponPick();
+    eWeapons.Add(eWeapon);
+    eWeaponsHit.Add(eWeaponDmg);
+    eWeaponsDmg.Add(eWeaponHit);
+    
 Main();
 
 
 void Main()
 {
-    int hp = 100;
+
     mainMeny();
-    Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]); 
+
+    int hp = 100;
+    Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
+    EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponsDmg[0], eWeaponsHit[0]); 
+
+    Console.WriteLine($"Your health: {enemyPlayer.enemyPlayerhealth}, Your damage: {enemyPlayer.enemyPlayerdamage}, Your hitchance: {enemyPlayer.enemyPlayerhitChance}");
     Console.WriteLine($"Your health: {player.playerhealth}, Your damage: {player.playerdamage}, Your hitchance: {player.playerhitChance}");
     Console.ReadLine();
     
@@ -88,7 +102,8 @@ static (string, int, int) bWeaponPick()
     string consoleOutput = "Please choose your starter weapon.";
     writing(consoleOutput);
 
-    List<int> weaponsDmg = new List<int> {30, 50, 40, 20};
+    
+    List<int> weaponsDmg = new List<int> {Random.Shared.Next(25, 36), Random.Shared.Next(45, 56), Random.Shared.Next(35, 46), Random.Shared.Next(15, 26)};
     List<int> weaponsHit = new List<int> {70, 50, 60, 100};
     List<string> bWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };
     for (int e = 0; e < bWeapons.Count; e++)
@@ -140,6 +155,32 @@ static (string, int, int) bWeaponPick()
     }
 }
 
+static (string, int, int) eWeaponPick()
+{
+    while(true)
+    {
+    
+    List<int> weaponsDmg = new List<int> {Random.Shared.Next(25, 36), Random.Shared.Next(45, 56), Random.Shared.Next(35, 46), Random.Shared.Next(15, 26)};
+    List<int> weaponsHit = new List<int> {70, 50, 60, 100};
+    List<string> eWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };
+
+    int randomPick = Random.Shared.Next(1, 5);
+
+        if(randomPick == 1)
+        {
+            return (eWeapons[0], weaponsDmg[0], weaponsHit[0]);
+        }else if(randomPick == 2)
+        {
+            return (eWeapons[1], weaponsDmg[1], weaponsHit[1]);
+        }else if(randomPick == 3)
+        {
+            return (eWeapons[2], weaponsDmg[2], weaponsHit[2]);
+        }else if(randomPick == 3)
+        {
+            return (eWeapons[3], weaponsDmg[3], weaponsHit[3]);
+        }
+    }
+}
 
 static bool Proceed(bool check)
 {
@@ -149,6 +190,7 @@ static bool Proceed(bool check)
         Console.Clear();
         string consoleOutput = "Are you ready? (y/n)";
         writing(consoleOutput); 
+
 
         string checkC = Console.ReadLine();
         if(checkC.ToLower() == "y")
@@ -170,10 +212,18 @@ static bool Proceed(bool check)
     }
 }
 
+static void battle()
+{
 
+    Proceed(true);
+    List<string> eNames = new List<string> {};
+    int eName = Random.Shared.Next(1, 10);
+    List
+    Console.WriteLine("A new foe has appeared,")
 
+    
 
-
+}
 
 class Player
 {
@@ -189,4 +239,23 @@ class Player
         playerhitChance = playerHitChance;
     }
 }
+
+class EnemyPlayer
+{
+    public int enemyPlayerhealth{get; set;}
+    public int enemyPlayerdamage{get; set;}
+    public double enemyPlayerhitChance{get; set;}
+
+
+    public EnemyPlayer(int enemyPlayerHealth, int enemyPlayerDamage, double enemyPlayerHitChance)
+    {
+        enemyPlayerhealth = enemyPlayerHealth;
+        enemyPlayerdamage = enemyPlayerDamage;
+        enemyPlayerhitChance = enemyPlayerHitChance;
+    }
+}
+
+
+
+
 //slut på lektion commit

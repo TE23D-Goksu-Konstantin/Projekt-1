@@ -14,10 +14,7 @@ List<int> statBweaponsHit = new List<int> { 70, 50, 60, 100 };
 
 
 
-(string eWeapon, int eWeaponDmg, int eWeaponHit) = eWeaponPick();
-eWeapons.Add(eWeapon);
-eWeaponsHit.Add(eWeaponDmg);
-eWeaponsDmg.Add(eWeaponHit);
+
 
 
 Main();
@@ -26,6 +23,13 @@ Main();
 
 void Main()
 {
+
+// while()
+    (string eWeapon, int eWeaponDmg, int eWeaponHit) = eWeaponPick();
+    eWeapons.Add(eWeapon);
+    eWeaponsHit.Add(eWeaponDmg);
+    eWeaponsDmg.Add(eWeaponHit);
+
 
     Player p = new(100, weaponsDmg[0], weaponsHit[0]);
     mainMeny();
@@ -70,7 +74,6 @@ void mainMeny()
 
 }
 
-
 static string nameP()
 {
     while (true)
@@ -89,10 +92,6 @@ static string nameP()
         }
     }
 }
-
-
-
-
 
 static (string, int, int) bWeaponPick()
 {
@@ -186,24 +185,22 @@ static (string, int, int) eWeaponPick()
     }
 }
 
-
-
-static string eNamePicker()
-{
-    List<string> eNames = new List<string> {
-    "Venom Reaper",
-    "Doom Fang Jacob",
-    "Bloody Howler",
-    "Shadow Brute Richard",
-    "Cursed Stalker",
-    "Inferno Wraith",
-    "Iron Specter",
-    "Night Titan Ludvig",
-    "Rotting Ghoul Konstantin",
-    "Obsidian Warlock"};
-    int eNameRan = Random.Shared.Next(0, eNames.Count);
-    return eNames[eNameRan];
-}
+// static string eNamePicker()
+// {
+//     List<string> eNames = new List<string> {
+//     "Venom Reaper",
+//     "Doom Fang Jacob",
+//     "Bloody Howler",
+//     "Shadow Brute Richard",
+//     "Cursed Stalker",
+//     "Inferno Wraith",
+//     "Iron Specter",
+//     "Night Titan Ludvig",
+//     "Rotting Ghoul Konstantin",
+//     "Obsidian Warlock"};
+//     int eNameRan = Random.Shared.Next(0, eNames.Count);
+//     return eNames[eNameRan];
+// }
 
 public class Player
 {
@@ -239,9 +236,25 @@ public class EnemyPlayer
 public class MainGame
 {
 
+    static string eNamePicker()
+{
+    List<string> eNames = new List<string> {
+    "Venom Reaper",
+    "Doom Fang Jacob",
+    "Bloody Howler",
+    "Shadow Brute Richard",
+    "Cursed Stalker",
+    "Inferno Wraith",
+    "Iron Specter",
+    "Night Titan Ludvig",
+    "Rotting Ghoul Konstantin",
+    "Obsidian Warlock"};
+    int eNameRan = Random.Shared.Next(0, eNames.Count);
+    return eNames[eNameRan];
+}
 
 
-    public static void Battle(Player player)
+    public static void Battle(Player player, Player pName)
     {
 
 

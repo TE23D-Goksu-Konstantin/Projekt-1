@@ -1,8 +1,4 @@
-﻿using System;
-
-
-
-List<string> weapons = new List<string> { };
+﻿List<string> weapons = new List<string> { };
 List<int> weaponsDmg = new List<int> { };
 List<int> weaponsHit = new List<int> { };
 List<string> eWeapons = new List<string> { };
@@ -31,9 +27,9 @@ void Main()
     eWeaponsDmg.Add(eWeaponHit);
 
 
-    Player p = new(100, weaponsDmg[0], weaponsHit[0]);
     mainMeny();
-    MainGame.Battle(p);
+    Player p = new(100, weaponsDmg[0], weaponsHit[0]);
+    MainGame.Battle(p, nameP(), 100, eWeaponsDmg[0], eWeaponsHit[0]);
     // int hp = 100;
     // Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
     // EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponsDmg[0], eWeaponsHit[0]); 
@@ -252,14 +248,14 @@ public class MainGame
     int eNameRan = Random.Shared.Next(0, eNames.Count);
     return eNames[eNameRan];
 }
+    
 
-
-    public static void Battle(Player player, Player pName)
+    public static void Battle(Player player, string pName, int hp, int eWeaponDmg, int eWeaponHit)
     {
 
 
         // Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
-        EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponsDmg[0], eWeaponsHit[0]);
+        EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponDmg, eWeaponHit);
         Utility.Proceed(true);
         Console.Clear();
 
@@ -270,10 +266,8 @@ public class MainGame
         Thread.Sleep(1000);
         Console.Clear();
 
-        int hp = 100;
         while (hp <= 100 && hp > 0)
         {
-            string pName = nameP();
             Console.WriteLine($"{pName}'s HP: " + """██████████""" + "\n----------------" + "\nWrite Atk to view your attacks"
             + "\nWrite Inv to view your inventory" + "\n----------------");
 

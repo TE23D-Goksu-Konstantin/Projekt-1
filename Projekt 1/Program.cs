@@ -27,9 +27,9 @@ void Main()
     eWeaponsDmg.Add(eWeaponHit);
 
 
-    mainMeny();
+    string name = MainMenu();
     Player p = new(100, weaponsDmg[0], weaponsHit[0]);
-    MainGame.Battle(p, nameP(), 100, eWeaponsDmg[0], eWeaponsHit[0]);
+    MainGame.Battle(p, name, 100, eWeaponsDmg[0], eWeaponsHit[0]);
     // int hp = 100;
     // Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
     // EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponsDmg[0], eWeaponsHit[0]); 
@@ -44,7 +44,7 @@ void Main()
 
 
 
-void mainMeny()
+string MainMenu()
 {
 
 
@@ -64,10 +64,11 @@ void mainMeny()
     weaponsHit.Add(bWeaponDmg);
     weaponsDmg.Add(bWeaponHit);
 
-    consoleOutput = "You chose " + $"{weapons[0]}" + ", now it's time to begin your journey.";
+    consoleOutput = $"{name} chose " + $"{weapons[0]}" + ", now it's time to begin your journey.";
     Utility.writing(consoleOutput);
     Thread.Sleep(1000);
 
+    return name;
 }
 
 static string nameP()

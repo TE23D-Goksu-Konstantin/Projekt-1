@@ -6,7 +6,7 @@ List<int> eWeaponsDmg = new List<int> { };
 List<double> eWeaponsHit = new List<double> { };
 List<int> enemyWeaponsDmg = new List<int> { };
 List<int> statBweaponsDmg = new List<int> { 30, 50, 40, 20 };
-List<double> statBweaponsHit = new List<double> { .7, .5, .6, 1.0};
+List<double> statBweaponsHit = new List<double> { .7, .5, .6, 1.0 };
 
 
 
@@ -20,7 +20,7 @@ Main();
 void Main()
 {
 
-// while()
+    // while()
     (string eWeapon, int eWeaponDmg, double eWeaponHit) = eWeaponPick();
     eWeapons.Add(eWeapon);
     eWeaponsDmg.Add(eWeaponDmg);
@@ -29,7 +29,7 @@ void Main()
 
     string name = MainMenu();
     Player p1 = new(100, weaponsDmg[0], weaponsHit[0], weapons[0]);
-    MainGame.Battle(p1, name, 100, eWeaponsDmg[0], eWeaponsHit[0]);
+    MainGame.Battle(p1, name, 100, eWeaponsDmg[0], eWeaponsHit[0], 100);
     // int hp = 100;
     // Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
     // EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponsDmg[0], eWeaponsHit[0]); 
@@ -59,7 +59,7 @@ string MainMenu()
     Console.Clear();
 
 
-    (string bWeapon, int bWeaponDmg,  double bWeaponHit) = bWeaponPick();
+    (string bWeapon, int bWeaponDmg, double bWeaponHit) = bWeaponPick();
     weapons.Add(bWeapon);
     weaponsDmg.Add(bWeaponDmg);
     weaponsHit.Add(bWeaponHit);
@@ -219,29 +219,26 @@ public class MainGame
 {
 
     static string eNamePicker()
-{
-    List<string> eNames = new List<string> {
+    {
+        List<string> eNames = new List<string> {
     "Venom Reaper",
     "Doom Fang Jacob",
-    "Bloody Howler",
+    "Goonie Howler Anton",
     "Shadow Brute Richard",
     "Cursed Stalker",
-    "Inferno Wraith",
+    "Inferno Wraith Calle",
     "Iron Specter",
     "Night Titan Ludvig",
     "Rotting Ghoul Konstantin",
     "Obsidian Warlock"};
-    int eNameRan = Random.Shared.Next(0, eNames.Count);
-    return eNames[eNameRan];
-}
-    
+        int eNameRan = Random.Shared.Next(0, eNames.Count);
+        return eNames[eNameRan];
+    }
 
-    public static void Battle(Player player, string pName, int hp, int eWeaponDmg, double eWeaponHit)
+
+    public static void Battle(Player player, string pName, int hpP, int eWeaponDmg, double eWeaponHit, int hpE)
     {
-
-
-        // Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
-        EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponDmg, eWeaponHit);
+        EnemyPlayer enemyPlayer = new EnemyPlayer(hpE, eWeaponDmg, eWeaponHit);
         Utility.Proceed(true);
         Console.Clear();
 
@@ -252,39 +249,94 @@ public class MainGame
         Thread.Sleep(1000);
         Console.Clear();
 
-        while (hp <= 100 && hp > 0)
+        while (hpP <= 100 && hpP > 0)
         {
-           
 
-            consoleOutput =  $"{pName}'s HP: " + """██████████""" + "\n----------------" + "\nWrite Atk to view your attacks"
+
+            consoleOutput = $"{pName}'s HP: " + """██████████""" + "\n----------------" + "\nWrite Atk to view your attacks"
             + "\nWrite Inv to view your inventory" + "\n----------------";
             Utility.writing(consoleOutput);
 
-            consoleOutput =  $"\n\n\n{eName}'s HP: " + """██████████""";
+            consoleOutput = $"\n\n\n{eName}'s HP: " + """██████████""";
             Utility.writing(consoleOutput);
 
 
             string battleChoice = Console.ReadLine();
-            if(battleChoice.ToLower() == "atk")
+            if (battleChoice.ToLower() == "atk")
             {
                 consoleOutput = $"{player.playerweapon}: {player.playerdamage} dmg, {player.playerhitChance * 100}% hitchance \n ";
                 Utility.writing(consoleOutput);
-            }else if(battleChoice.ToLower() == "inv")
-            {
-                consoleOutput = "${player.playerweapon} \n ";
+
+                consoleOutput = $"\nPick your attack (1-{player.playerweapon.Count()})\nWrite 'back' to return ";
                 Utility.writing(consoleOutput);
-            }else
+                string checkPick = Console.ReadLine();
+                if (checkPick.ToLower() == "back")
+                {
+                    Console.Clear();
+                    continue;
+                }
+                else if (int.TryParse(checkPick, out int e))
+                {
+                    FightScene(player.playerdamage, player.playerhitChance, hpE, hpP, enemyPlayer.enemyPlayerdamage, enemyPlayer.enemyPlayerhitChance, eName);
+                }
+
+            }
+            else if (battleChoice.ToLower() == "inv")
+            {
+                consoleOutput = $"{player.playerweapon} \n ";
+                Utility.writing(consoleOutput);
+            }
+            else
             {
                 consoleOutput = "Error";
                 Utility.writing(consoleOutput);
             }
-        battleChoice = Console.ReadLine();
+            battleChoice = Console.ReadLine();
 
 
         }
     }
-}
 
+
+    static void FightScene(int pAttack, double pAttackHit, int hpEnemy, int hpPlayer, int eAttack, double eAttackHit, string EnemyName)
+    {
+        int Chance = Random.Shared.Next(1, 101);
+
+        if (Chance <= pAttackHit * 100)
+        {
+
+            hpEnemy = -pAttack;
+            string consoleOutput = $"You hit and dealt {pAttack} damage!";
+            Utility.writing(consoleOutput);
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
+        else
+        {
+            string consoleOutput = "You missed!";
+            Utility.writing(consoleOutput);
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
+
+        if (Chance <= eAttackHit * 100)
+        {
+            hpPlayer = eAttack;
+            string consoleOutput = $"{EnemyName} hit and dealt {eAttack} damage!";
+            Utility.writing(consoleOutput);
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
+        else
+        {
+            string consoleOutput = $"{EnemyName} missed!";
+            Utility.writing(consoleOutput);
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
+
+    }
+}
 class Utility
 {
 
@@ -329,7 +381,8 @@ class Utility
     }
 }
 
-//kom ihåg pseudo kod, gör damage systemet till pseudo
+
+
 //slut på lektion commit
 
 // █▒▒▒▒▒▒▒▒▒10%

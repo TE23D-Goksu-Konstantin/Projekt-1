@@ -94,14 +94,15 @@ static (string, int, double) bWeaponPick()
 {
     while (true)
     {
-        Console.Clear();
-        string consoleOutput = "Please choose your starter weapon.";
-        Utility.writing(consoleOutput);
-
-
         List<int> weaponsDmg = new List<int> { Random.Shared.Next(25, 36), Random.Shared.Next(45, 56), Random.Shared.Next(35, 46), Random.Shared.Next(15, 26) };
         List<double> weaponsHit = new List<double> { .7, .5, .6, 1 };
         List<string> bWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };
+        
+        Console.Clear();
+        string consoleOutput = $"Please choose your starter weapon. (1-{bWeapons.Count()})";
+        Utility.writing(consoleOutput);
+
+
         for (int e = 0; e < bWeapons.Count; e++)
         {
             consoleOutput = $"{e + 1}: " + $"{bWeapons[e]}";
@@ -121,7 +122,7 @@ static (string, int, double) bWeaponPick()
                     Utility.writing(consoleOutput);
                     consoleOutput = $"Damage: {weaponsDmg[e]}";
                     Utility.writing(consoleOutput);
-                    consoleOutput = $"Hit chance: {weaponsHit[e] * 100}";
+                    consoleOutput = $"Hit chance: {weaponsHit[e] * 100}%";
                     Utility.writing(consoleOutput);
                     consoleOutput = "Are you sure? (y/n)";
                     Utility.writing(consoleOutput);
@@ -264,6 +265,7 @@ public class MainGame
             string battleChoice = Console.ReadLine();
             if (battleChoice.ToLower() == "atk")
             {
+                Console.Clear();
                 consoleOutput = $"{player.playerweapon}: {player.playerdamage} dmg, {player.playerhitChance * 100}% hitchance \n ";
                 Utility.writing(consoleOutput);
 
@@ -272,7 +274,6 @@ public class MainGame
                 string checkPick = Console.ReadLine();
                 if (checkPick.ToLower() == "back")
                 {
-                    Console.Clear();
                     continue;
                 }
                 else if (int.TryParse(checkPick, out int e))

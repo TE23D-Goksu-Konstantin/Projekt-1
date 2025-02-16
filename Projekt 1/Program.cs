@@ -265,7 +265,7 @@ public class MainGame
                 consoleOutput = $"{player.playerweapon}: {player.playerdamage} dmg, {player.playerhitChance * 100}% hitchance \n ";
                 Utility.writing(consoleOutput);
 
-                consoleOutput = $"\nPick your attack (1-1)" + /*{player.playerweapon.Count()}, will be used if i decide to add multiple weapons/attacks, therefore it will be a list too*/ "\"nWrite 'back' to return ";
+                consoleOutput = $"\nPick your attack (1)" + /*{player.playerweapon.Count()}, will be used if i decide to add multiple weapons/attacks, therefore it will be a list too*/ "\nWrite 'back' to return ";
                 Utility.writing(consoleOutput);
                 string checkPick = Console.ReadLine();
                 if (checkPick.ToLower() == "back")
@@ -280,10 +280,13 @@ public class MainGame
             }
             else if (battleChoice.ToLower() == "inv")
             {
-                for (int e = 0; e<0; e++)
-                {
-                consoleOutput = $"{player.playerweapon[e]}";
+                Console.Clear();
+                consoleOutput = $"{player.playerweapon}"+"\nWrite 'back' to return";       //prints all weapons 
                 Utility.writing(consoleOutput);
+                string checkPick = Console.ReadLine();
+                if (checkPick.ToLower() == "back")
+                {
+                    continue;
                 }
             }
             else
@@ -294,6 +297,22 @@ public class MainGame
             continue;
 
 
+        }
+
+        if(hpE <= 0)
+        {
+            consoleOutput = $"{pName}" + " has won the battle!";
+            Utility.writing(consoleOutput);
+        }
+        else if(hpP <= 0)
+        {
+            consoleOutput = $"{eName}" + " has won the battle!";
+            Utility.writing(consoleOutput);
+        }
+        else
+        {
+            consoleOutput = "Draw, both of you ended up killing eachother";
+            Utility.writing(consoleOutput);
         }
 
 

@@ -8,11 +8,6 @@ List<int> enemyWeaponsDmg = new List<int> { };
 List<int> statBweaponsDmg = new List<int> { 30, 50, 40, 20 };
 List<double> statBweaponsHit = new List<double> { .7, .5, .6, 1.0 };
 
-
-
-
-
-
 Main();
 
 
@@ -174,12 +169,12 @@ static (string, int, double) eWeaponPick()       //same for the players weapons 
 public class Player
 {
     public int playerhealth { get; set; }
-    public int playerdamage { get; set; }
-    public double playerhitChance { get; set; }
+    public int playerdamage { get; set; }             //all these variables have two properties, get returns the value that set recieves which means that if the weapons has 50dmg set recieves that value which in Main is later assigned to the players stats
+    public double playerhitChance { get; set; }       
     public string playerweapon { get; set; }
 
 
-    public Player(int playerHealth, int playerDamage, double playerHitChance, string playerWeapon)
+    public Player(int playerHealth, int playerDamage, double playerHitChance, string playerWeapon)  //same for the class Player goes for this 
     {
         playerhealth = playerHealth;
         playerdamage = playerDamage;
@@ -203,7 +198,6 @@ public class EnemyPlayer
     }
 }
 
-
 public class MainGame
 {
 
@@ -220,18 +214,19 @@ public class MainGame
     "Night Titan Ludvig",
     "Rotting Ghoul Konstantin",
     "Obsidian Warlock"};
-        int eNameRan = Random.Shared.Next(0, eNames.Count+1);
+        int eNameRan = Random.Shared.Next(0, eNames.Count+1);      //randomizes an int that later picks one from the list and returns it
         return eNames[eNameRan];
     }
 
 
     public static void Battle(Player player, string pName, int hpP, int eWeaponDmg, double eWeaponHit, int hpE)
     {
-        EnemyPlayer enemyPlayer = new EnemyPlayer(hpE, eWeaponDmg, eWeaponHit);
+
+        EnemyPlayer enemyPlayer = new EnemyPlayer(hpE, eWeaponDmg, eWeaponHit);    //defines enemy players stats
         Utility.Proceed(true);
         Console.Clear();
 
-        string eName = eNamePicker();
+        string eName = eNamePicker();          //each time this method is played the enemies name is randomized
 
         string consoleOutput = $"A new foe has appeared, their name's {eName} and they approach you with malicious intent";
         Utility.writing(consoleOutput);
@@ -244,7 +239,7 @@ public class MainGame
 
             int maxHP = 100;
             int hpBarsP = (10*hpP)/maxHP;            //calculates remaining health bar(s)
-            int hpBarsE = (10*hpP)/maxHP;            
+            int hpBarsE = (10*hpE)/maxHP;            
 
             string hpBarP = new string('█',hpBarsP);           //creates a class that will print out the hpbars depending on the users health
             string hpBarE = new string('█',hpBarsE);           
@@ -306,7 +301,7 @@ public class MainGame
         }
         else if(hpP <= 0)
         {
-            consoleOutput = $"{eName}" + " has won the battle!";
+            consoleOutput = $"{eName}" + " has won the battle!";          //checks who or if both lost
             Utility.writing(consoleOutput);
         }
         else
@@ -314,7 +309,7 @@ public class MainGame
             consoleOutput = "Draw, both of you ended up killing eachother";
             Utility.writing(consoleOutput);
         }
-
+Console.ReadLine();
 
     }
 
@@ -323,7 +318,7 @@ public class MainGame
     {
         int Chance = Random.Shared.Next(1, 101);
 
-        if (Chance <= pAttackHit * 100)
+        if (Chance <= pAttackHit * 100)           //checks whether the users hitchance is bigger, if it is it hits
         {
 
             hpEnemy -= pAttack;
@@ -338,6 +333,8 @@ public class MainGame
             Thread.Sleep(1000);
 
         }
+
+        Chance = Random.Shared.Next(1, 101);          //randomizes once again so it doesn't repeat itself
 
         if (Chance <= eAttackHit * 100)
         {
@@ -354,7 +351,7 @@ public class MainGame
 
         }
         Console.Clear();
-        return (hpEnemy, hpPlayer);
+        return (hpEnemy, hpPlayer);         //returns the health points for both to later be checked if one has lost the game or just change the amount of hpbars
 
     }
 }
@@ -367,7 +364,7 @@ class Utility
         while (true)
         {
             Console.Clear();
-            string consoleOutput = "Are you ready? (y/n)";
+            string consoleOutput = "Are you ready? (y/n)";        //checks user input, if y continue, if n redo the loop
             Utility.writing(consoleOutput);
 
 
@@ -395,7 +392,7 @@ class Utility
     {
         for (int i = 0; i < text.Length; i++)
         {
-            Console.Write(text[i]);
+            Console.Write(text[i]);              //prints each word in the string singularily
             Thread.Sleep(30);
         }
         Console.WriteLine();
@@ -403,15 +400,3 @@ class Utility
 }
 
 
-
-//slut på lektion commit
-
-// █▒▒▒▒▒▒▒▒▒10%
-
-// ████▒▒▒▒▒▒30%
-
-// █████▒▒▒▒▒50%
-
-// ████████▒▒80%
-
-// ██████████100%

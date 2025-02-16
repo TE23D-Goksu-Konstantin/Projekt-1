@@ -242,31 +242,37 @@ public class MainGame
         {
             Console.Clear();
 
-            
+            int maxHP = 100;
+            int hpBarsP = (10*hpP)/maxHP;            //calculates remaining health bar(s)
+            int hpBarsE = (10*hpP)/maxHP;            
 
-            consoleOutput = $"{pName}'s HP: " + """██████████""" + "\n----------------" + "\nWrite Atk to view your attacks"
+            string hpBarP = new string('█',hpBarsP);           //creates a class that will print out the hpbars depending on the users health
+            string hpBarE = new string('█',hpBarsE);           
+
+
+            consoleOutput = $"{pName}'s HP: " + $"{hpBarP}" + "\n----------------" + "\nWrite Atk to view your attacks"
             + "\nWrite Inv to view your inventory" + "\n----------------";
             Utility.writing(consoleOutput);
 
-            consoleOutput = $"\n\n\n{eName}'s HP: " + """██████████""" + "\n----------------";
+            consoleOutput = $"\n\n\n{eName}'s HP: " + $"{hpBarE}" + "\n----------------";            //player and enemies hp + instructions for attacks + viewing inv
             Utility.writing(consoleOutput);
 
 
             string battleChoice = Console.ReadLine();
-            if (battleChoice.ToLower() == "atk")
+            if (battleChoice.ToLower() == "atk")                //if-statement checking what the user inputs
             {
                 Console.Clear();
                 consoleOutput = $"{player.playerweapon}: {player.playerdamage} dmg, {player.playerhitChance * 100}% hitchance \n ";
                 Utility.writing(consoleOutput);
 
-                consoleOutput = $"\nPick your attack (1-{player.playerweapon.Count()})\nWrite 'back' to return ";
+                consoleOutput = $"\nPick your attack (1-1)" + /*{player.playerweapon.Count()}, will be used if i decide to add multiple weapons/attacks, therefore it will be a list too*/ "\"nWrite 'back' to return ";
                 Utility.writing(consoleOutput);
                 string checkPick = Console.ReadLine();
                 if (checkPick.ToLower() == "back")
                 {
                     continue;
                 }
-                else if (int.TryParse(checkPick, out int e))
+                else if (int.TryParse(checkPick, out int e))          //recieves return value of health from both "players" aswell as sending arguments to fightscene
                 {
                     (hpE, hpP) = FightScene(player.playerdamage, player.playerhitChance, hpE, hpP, enemyPlayer.enemyPlayerdamage, enemyPlayer.enemyPlayerhitChance, eName);
                 }

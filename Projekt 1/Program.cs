@@ -20,29 +20,17 @@ Main();
 void Main()
 {
 
-    // while()
     (string eWeapon, int eWeaponDmg, double eWeaponHit) = eWeaponPick();
-    eWeapons.Add(eWeapon);
+    eWeapons.Add(eWeapon);                                                 //inputs the enemies randomly chosen weapons + stats for that weapon
     eWeaponsDmg.Add(eWeaponDmg);
     eWeaponsHit.Add(eWeaponHit);
 
 
     string name = MainMenu();
-    Player p1 = new(100, weaponsDmg[0], weaponsHit[0], weapons[0]);
+    Player p1 = new(100, weaponsDmg[0], weaponsHit[0], weapons[0]);                    //defines a new player to input into the battle method
     MainGame.Battle(p1, name, 100, eWeaponsDmg[0], eWeaponsHit[0], 100);
-    // int hp = 100;
-    // Player player = new Player(hp, weaponsDmg[0], weaponsHit[0]);
-    // EnemyPlayer enemyPlayer = new EnemyPlayer(hp, eWeaponsDmg[0], eWeaponsHit[0]); 
-
-
-    // Console.WriteLine($"Your health: {enemyPlayer.enemyPlayerhealth}, Your damage: {enemyPlayer.enemyPlayerdamage}, Your hitchance: {enemyPlayer.enemyPlayerhitChance}");
-    // Console.WriteLine($"Your health: {player.playerhealth}, Your damage: {player.playerdamage}, Your hitchance: {player.playerhitChance}");
-    // Console.ReadLine();
 
 }
-
-
-
 
 string MainMenu()
 {
@@ -52,7 +40,7 @@ string MainMenu()
     Utility.writing(consoleOutput);
 
 
-    string name = nameP();
+    string name = nameP();                      //where the method calls the player names to be chosen
     consoleOutput = $"Greetings {name}!";
     Utility.writing(consoleOutput);
     Thread.Sleep(500);
@@ -60,15 +48,15 @@ string MainMenu()
 
 
     (string bWeapon, int bWeaponDmg, double bWeaponHit) = bWeaponPick();
-    weapons.Add(bWeapon);
+    weapons.Add(bWeapon);                                                     //assigns the chosen weapon + their stats for the player
     weaponsDmg.Add(bWeaponDmg);
     weaponsHit.Add(bWeaponHit);
 
-    consoleOutput = $"{name} chose " + $"{weapons[0]}" + ", now it's time to begin your journey.";
+    consoleOutput = $"{name} chose " + $"{weapons[0]}" + ", now it's time to begin your journey.";   
     Utility.writing(consoleOutput);
     Thread.Sleep(1000);
 
-    return name;
+    return name;             //returns the player chosen name for logistics purposes
 }
 
 static string nameP()
@@ -78,7 +66,7 @@ static string nameP()
         string name = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(name) || int.TryParse(name, out int t))
         {
-            string consoleOutput = "Error";
+            string consoleOutput = "Error";                                   //where the player gets to pick their name
             Utility.writing(consoleOutput);
             continue;
         }
@@ -96,7 +84,7 @@ static (string, int, double) bWeaponPick()
     {
         List<int> weaponsDmg = new List<int> { Random.Shared.Next(25, 36), Random.Shared.Next(45, 56), Random.Shared.Next(35, 46), Random.Shared.Next(15, 26) };
         List<double> weaponsHit = new List<double> { .7, .5, .6, 1 };
-        List<string> bWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };
+        List<string> bWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };         //all the stats for the player beginner weapons
         
         Console.Clear();
         string consoleOutput = $"Please choose your starter weapon. (1-{bWeapons.Count()})";
@@ -105,7 +93,7 @@ static (string, int, double) bWeaponPick()
 
         for (int e = 0; e < bWeapons.Count; e++)
         {
-            consoleOutput = $"{e + 1}: " + $"{bWeapons[e]}";
+            consoleOutput = $"{e + 1}: " + $"{bWeapons[e]}";          //writes the players weapons
             Utility.writing(consoleOutput);
         }
 
@@ -118,7 +106,7 @@ static (string, int, double) bWeaponPick()
             for (int e = 0; e < bWeapons.Count; e++)
                 if (pickOut == e + 1)
                 {
-                    consoleOutput = $"{bWeapons[e]}" + " stats";
+                    consoleOutput = $"{bWeapons[e]}" + " stats";             //prints all the stats for the weapons
                     Utility.writing(consoleOutput);
                     consoleOutput = $"Damage: {weaponsDmg[e]}";
                     Utility.writing(consoleOutput);
@@ -153,15 +141,15 @@ static (string, int, double) bWeaponPick()
     }
 }
 
-static (string, int, double) eWeaponPick()
+static (string, int, double) eWeaponPick()       //same for the players weapons "bWeaponPick" but it is randomly chosen and assigned to the enemy
 {
     while (true)
     {
 
         List<int> weaponsDmg = new List<int> { Random.Shared.Next(25, 36), Random.Shared.Next(45, 56), Random.Shared.Next(35, 46), Random.Shared.Next(15, 26) };
         List<double> weaponsHit = new List<double> { 0.7, 0.5, 0.6, 1.0 };
-        List<string> eWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" };
-
+        List<string> eWeapons = new List<string> { "Sword", "Axe", "Bow", "Dagger" }; 
+ 
         int randomPick = Random.Shared.Next(0, eWeapons.Count);
 
         if (randomPick == 1)
@@ -225,14 +213,14 @@ public class MainGame
     "Venom Reaper",
     "Doom Fang Jacob",
     "Goonie Howler Anton",
-    "Shadow Brute Richard",
+    "Brainrot Brute Richard",
     "Cursed Stalker",
     "Inferno Wraith Calle",
     "Iron Specter",
     "Night Titan Ludvig",
     "Rotting Ghoul Konstantin",
     "Obsidian Warlock"};
-        int eNameRan = Random.Shared.Next(0, eNames.Count);
+        int eNameRan = Random.Shared.Next(0, eNames.Count+1);
         return eNames[eNameRan];
     }
 
@@ -250,15 +238,17 @@ public class MainGame
         Thread.Sleep(1000);
         Console.Clear();
 
-        while (hpP <= 100 && hpP > 0)
+        while (hpP > 0 && hpE > 0)
         {
+            Console.Clear();
 
+            
 
             consoleOutput = $"{pName}'s HP: " + """██████████""" + "\n----------------" + "\nWrite Atk to view your attacks"
             + "\nWrite Inv to view your inventory" + "\n----------------";
             Utility.writing(consoleOutput);
 
-            consoleOutput = $"\n\n\n{eName}'s HP: " + """██████████""";
+            consoleOutput = $"\n\n\n{eName}'s HP: " + """██████████""" + "\n----------------";
             Utility.writing(consoleOutput);
 
 
@@ -278,63 +268,68 @@ public class MainGame
                 }
                 else if (int.TryParse(checkPick, out int e))
                 {
-                    FightScene(player.playerdamage, player.playerhitChance, hpE, hpP, enemyPlayer.enemyPlayerdamage, enemyPlayer.enemyPlayerhitChance, eName);
+                    (hpE, hpP) = FightScene(player.playerdamage, player.playerhitChance, hpE, hpP, enemyPlayer.enemyPlayerdamage, enemyPlayer.enemyPlayerhitChance, eName);
                 }
 
             }
             else if (battleChoice.ToLower() == "inv")
             {
-                consoleOutput = $"{player.playerweapon} \n ";
+                for (int e = 0; e<0; e++)
+                {
+                consoleOutput = $"{player.playerweapon[e]}";
                 Utility.writing(consoleOutput);
+                }
             }
             else
             {
                 consoleOutput = "Error";
                 Utility.writing(consoleOutput);
             }
-            battleChoice = Console.ReadLine();
+            continue;
 
 
         }
+
+
     }
 
 
-    static void FightScene(int pAttack, double pAttackHit, int hpEnemy, int hpPlayer, int eAttack, double eAttackHit, string EnemyName)
+    static (int, int) FightScene(int pAttack, double pAttackHit, int hpEnemy, int hpPlayer, int eAttack, double eAttackHit, string EnemyName)
     {
         int Chance = Random.Shared.Next(1, 101);
 
         if (Chance <= pAttackHit * 100)
         {
 
-            hpEnemy = -pAttack;
+            hpEnemy -= pAttack;
             string consoleOutput = $"You hit and dealt {pAttack} damage!";
             Utility.writing(consoleOutput);
             Thread.Sleep(1000);
-            Console.Clear();
         }
         else
         {
             string consoleOutput = "You missed!";
             Utility.writing(consoleOutput);
             Thread.Sleep(1000);
-            Console.Clear();
+
         }
 
         if (Chance <= eAttackHit * 100)
         {
-            hpPlayer = eAttack;
+            hpPlayer -= eAttack;
             string consoleOutput = $"{EnemyName} hit and dealt {eAttack} damage!";
             Utility.writing(consoleOutput);
             Thread.Sleep(1000);
-            Console.Clear();
         }
         else
         {
             string consoleOutput = $"{EnemyName} missed!";
             Utility.writing(consoleOutput);
             Thread.Sleep(1000);
-            Console.Clear();
+
         }
+        Console.Clear();
+        return (hpEnemy, hpPlayer);
 
     }
 }
@@ -376,7 +371,7 @@ class Utility
         for (int i = 0; i < text.Length; i++)
         {
             Console.Write(text[i]);
-            Thread.Sleep(60);
+            Thread.Sleep(30);
         }
         Console.WriteLine();
     }
